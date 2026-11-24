@@ -4,132 +4,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Hub</title>
+<title>Smart Study Hub | Sign Up</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#f0f4ff;color:#222}
-header{background:#243b80;color:white;text-align:center;padding:22px}
-nav{background:#172554;display:flex;flex-wrap:wrap;justify-content:center}
-nav button{background:none;color:white;border:0;padding:14px;cursor:pointer}
-.page{display:none;background:white;max-width:800px;margin:25px auto;padding:25px;border-radius:12px}
-.page.active{display:block}
-input,select{width:100%;padding:12px;margin:10px 0;border:1px solid #bbb;border-radius:6px}
-.action{background:#243b80;color:white;padding:12px 22px;border:0;border-radius:6px;cursor:pointer}
-footer{background:#172554;color:white;text-align:center;padding:20px}
-</style>
-</head>
-<body>
-
-<header>
-<h1>Student Hub</h1>
-<p>Your Learning, Your Future</p>
-</header>
-
-<nav>
-<button onclick="showPage('home')">Home</button>
-<button onclick="showPage('signup')">Sign Up</button>
-<button onclick="showPage('dashboard')">Dashboard</button>
-<button onclick="showPage('courses')">Courses</button>
-<button onclick="showPage('about')">About Us</button>
-<button onclick="showPage('contact')">Contact</button>
-</nav>
-
-<section id="home" class="page active">
-<h2>Welcome to Student Hub!</h2>
-<p>Your learning journey starts here.</p>
-<button class="action" onclick="showPage('signup')">Get Started</button>
-</section>
-
-<section id="signup" class="page">
-<h2>Student Sign Up</h2>
-<form id="signupForm">
-<input name="name" placeholder="Full Name" required>
-<input name="email" type="email" placeholder="Email Address" required>
-<input name="phone" type="tel" placeholder="Phone Number" required>
-<select name="course" required>
-<option value="">Select Course</option>
-<option>Web Development</option>
-<option>Python</option>
-<option>C++</option>
-<option>Computer Basics</option>
-</select>
-<button class="action" id="submitBtn" type="submit">Sign Up</button>
-</form>
-<p id="message"></p>
-</section>
-
-<section id="dashboard" class="page">
-<h2>Student Dashboard</h2>
-<h3 id="welcome">Welcome to Student Hub!</h3>
-<p>Your registration has been submitted.</p>
-<p>Explore your learning journey with us.</p>
-</section>
-
-<section id="courses" class="page">
-<h2>Our Courses</h2>
-<h3>Web Development</h3>
-<p>Learn HTML, CSS and JavaScript.</p>
-<h3>Python Programming</h3>
-<p>Learn programming fundamentals.</p>
-<h3>C++ Programming</h3>
-<p>Learn object-oriented programming.</p>
-</section>
-
-<section id="about" class="page">
-<h2>About Us</h2>
-<p>Student Hub helps students learn technology and develop skills.</p>
-</section>
-
-<section id="contact" class="page">
-<h2>Contact Us</h2>
-<p>Email: studenthub@example.com</p>
-<p>Thank you for visiting Student Hub!</p>
-</section>
-
-<footer>
-<p>© 2026 Student Hub | All Rights Reserved</p>
-</footer>
-
-<script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbwyLBVdPKCfPVSYlYdRYCMsvUIArcqjTUclDMVGMUcQUbqSsu0drVrkLVB2z1HzpgkUIQ/exec";
-
-function showPage(id){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- document.getElementById(id).classList.add("active");
- window.scrollTo(0,0);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
-document.getElementById("signupForm").addEventListener("submit", async function(e){
- e.preventDefault();
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg,#667eea,#764ba2,#f093fb);
+}
 
- const form=this;
- const btn=document.getElementById("submitBtn");
- const msg=document.getElementById("message");
+.container {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  padding: 35px 28px;
+  border-radius: 22px;
+  box-shadow: 0 15px 40px #3334;
+}
 
- btn.disabled=true;
- btn.textContent="Submitting...";
- msg.textContent="Please wait...";
+.logo {
+  text-align: center;
+  font-size: 48px;
+}
 
- try{
-   await fetch(scriptURL,{
-     method:"POST",
-     body:new FormData(form),
-     mode:"no-cors"
-   });
+h1 {
+  text-align: center;
+  color: #6545bd;
+  margin: 10px 0;
+}
 
-   const name=form.elements["name"].value;
-   document.getElementById("welcome").textContent="Welcome, "+name+"!";
-   form.reset();
-   msg.textContent="Registration submitted!";
-   showPage("dashboard");
+.subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 25px;
+}
 
- }catch(error){
-   msg.textContent="Submission failed. Please try again.";
- }
+input {
+  width: 100%;
+  padding: 14px;
+  margin: 9px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+}
 
- btn.disabled=false;
- btn.textContent="Sign Up";
+input:focus {
+  border-color: #7655d8;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg,#667eea,#764ba2);
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .6;
+}
+
+#message {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 22px;
+  color: #888;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="logo">📚</div>
+  <h1>Smart Study Hub</h1>
+  <p class="subtitle">Create Your Student Account</p>
+
+  <form id="signupForm">
+    <input id="name" type="text"
+      placeholder="Full Name" required>
+
+    <input id="email" type="email"
+      placeholder="Email Address" required>
+
+    <input id="password" type="password"
+      placeholder="Create Password" minlength="6" required>
+
+    <button id="signupBtn" type="submit">
+      Create Account 🚀
+    </button>
+  </form>
+
+  <p id="message"></p>
+
+  <div class="footer">
+    Learn • Grow • Achieve 🌟
+  </div>
+</div>
+
+<script>
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwyLBVdPKCfPVSYlYdRYCMsvUIArcqjTUclDMVGMUcQUbqSsu0drVrkLVB2z1HzpgkUIQ/exec";
+
+const DASHBOARD_URL = "./dashboard.html";
+
+document.getElementById("signupForm")
+.addEventListener("submit", async function(e) {
+
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const message = document.getElementById("message");
+  const button = document.getElementById("signupBtn");
+
+  button.disabled = true;
+  button.textContent = "Creating Account...";
+  message.textContent = "Please wait...";
+
+  try {
+    const response = await fetch(SHEET_URL, {
+      method: "POST",
+      body: new URLSearchParams({
+        action: "signup",
+        name: name,
+        email: email,
+        password: password
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      message.style.color = "green";
+      message.textContent = "Account created successfully!";
+
+      // Store only basic display information.
+      sessionStorage.setItem("studentName", name);
+      sessionStorage.setItem("studentEmail", email);
+
+      setTimeout(() => {
+        window.location.href = DASHBOARD_URL;
+      }, 1000);
+
+    } else {
+      throw new Error(result.message || "Signup failed");
+    }
+
+  } catch(error) {
+    message.style.color = "red";
+    message.textContent = error.message ||
+      "Something went wrong. Please try again.";
+
+    button.disabled = false;
+    button.textContent = "Create Account 🚀";
+  }
 });
 </script>
+
 </body>
 </html>
+
