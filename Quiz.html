@@ -1,175 +1,176 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Hub Quiz</title>
-
+<title>Student Hub - Quiz</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
-    background: #eef2ff;
-    text-align: center;
-    padding: 20px;
+  font-family: Arial;
+  background: #eef2ff;
+  text-align: center;
+  padding: 20px;
 }
 .container {
-    background: white;
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px #ccc;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 15px;
 }
 h1 { color: #4338ca; }
 button {
-    background: #4f46e5;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    margin: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
+  padding: 12px 20px;
+  margin: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
 }
 .option {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    background: #e0e7ff;
-    color: #222;
+  display: block;
+  width: 100%;
+  background: #e0e7ff;
+  color: black;
 }
-.option:hover { background: #c7d2fe; }
-#quizBox { display: none; }
+#quizBox, #resultBox { display: none; }
 </style>
 </head>
-
 <body>
 
 <div class="container">
 <h1>🎓 Student Hub Quiz</h1>
-<p>Test Your Knowledge!</p>
+<p>Test Your Knowledge</p>
 
 <div id="startBox">
-<button onclick="startQuiz()">Start Quiz</button>
+<button type="button" onclick="startQuiz()">Start Quiz</button>
 </div>
 
 <div id="quizBox">
 <h3 id="question"></h3>
 <div id="options"></div>
 <p id="progress"></p>
-<button id="nextBtn" onclick="nextQuestion()" style="display:none">
+<button type="button" id="nextBtn" onclick="nextQuestion()" style="display:none">
 Next Question
 </button>
 </div>
 
-<div id="resultBox" style="display:none">
+<div id="resultBox">
 <h2>Quiz Completed!</h2>
 <h3 id="score"></h3>
-<button onclick="restartQuiz()">Try Again</button>
+<button type="button" onclick="startQuiz()">Restart Quiz</button>
 </div>
 </div>
 
 <script>
 const questions = [
 {
-q: "Which language is used for web development?",
-a: ["HTML", "C++", "Python", "Java"],
-correct: 0
+question: "Which language is used to create web pages?",
+options: ["HTML", "C++", "Python", "Java"],
+answer: 0
 },
 {
-q: "What does CPU stand for?",
-a: ["Central Processing Unit", "Computer Power Unit", "Control Program Unit", "Central Print Unit"],
-correct: 0
+question: "What is the full form of CPU?",
+options: ["Central Processing Unit", "Computer Power Unit", "Control Program Unit", "Central Print Unit"],
+answer: 0
 },
 {
-q: "Which symbol is used for comments in HTML?",
-a: ["//", "<!-- -->", "#", "**"],
-correct: 1
+question: "Which language is used for styling web pages?",
+options: ["HTML", "CSS", "C++", "SQL"],
+answer: 1
 },
 {
-q: "Which language is used to style web pages?",
-a: ["HTML", "CSS", "C", "SQL"],
-correct: 1
+question: "Which symbol is used for comments in HTML?",
+options: ["//", "<!-- -->", "#", "**"],
+answer: 1
 },
 {
-q: "Which keyword is used to declare a variable in JavaScript?",
-a: ["var", "print", "include", "define"],
-correct: 0
+question: "Which keyword declares a variable in JavaScript?",
+options: ["var", "print", "include", "define"],
+answer: 0
 }
 ];
 
-let current = 0;
-let points = 0;
+let currentQuestion = 0;
+let score = 0;
 let answered = false;
 
 function startQuiz() {
-    current = 0;
-    points = 0;
-    document.getElementById("startBox").style.display = "none";
-    document.getElementById("resultBox").style.display = "none";
-    document.getElementById("quizBox").style.display = "block";
-    showQuestion();
+  currentQuestion = 0;
+  score = 0;
+
+  document.getElementById("startBox").style.display = "none";
+  document.getElementById("resultBox").style.display = "none";
+  document.getElementById("quizBox").style.display = "block";
+
+  showQuestion();
 }
 
 function showQuestion() {
-    answered = false;
-    let q = questions[current];
+  answered = false;
 
-    document.getElementById("question").textContent =
-        q.q;
+  const q = questions[currentQuestion];
 
-    document.getElementById("progress").textContent =
-        "Question " + (current + 1) + " of " + questions.length;
+  document.getElementById("question").textContent = q.question;
+  document.getElementById("progress").textContent =
+    "Question " + (currentQuestion + 1) + " of " + questions.length;
 
-    document.getElementById("nextBtn").style.display = "none";
+  document.getElementById("nextBtn").style.display = "none";
 
-    let options = document.getElementById("options");
-    options.innerHTML = "";
+  const optionsBox = document.getElementById("options");
+  optionsBox.innerHTML = "";
 
-    q.a.forEach((answer, index) => {
-        let btn = document.createElement("button");
-        btn.textContent = answer;
-        btn.className = "option";
-        btn.onclick = () => checkAnswer(index, btn);
-        options.appendChild(btn);
-    });
+  q.options.forEach(function(option, index) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = option;
+    button.className = "option";
+
+    button.onclick = function() {
+      checkAnswer(index, button);
+    };
+
+    optionsBox.appendChild(button);
+  });
 }
 
-function checkAnswer(index, btn) {
-    if (answered) return;
+function checkAnswer(index, button) {
+  if (answered) return;
 
-    answered = true;
+  answered = true;
 
-    if (index === questions[current].correct) {
-        points++;
-        btn.style.background = "#86efac";
-    } else {
-        btn.style.background = "#fca5a5";
-    }
+  if (index === questions[currentQuestion].answer) {
+    score++;
+    button.style.background = "#86efac";
+  } else {
+    button.style.background = "#fca5a5";
+  }
 
-    document.getElementById("nextBtn").style.display = "inline-block";
+  document.getElementById("nextBtn").style.display = "inline-block";
 }
 
 function nextQuestion() {
-    current++;
+  currentQuestion++;
 
-    if (current < questions.length) {
-        showQuestion();
-    } else {
-        document.getElementById("quizBox").style.display = "none";
-        document.getElementById("resultBox").style.display = "block";
-        document.getElementById("score").textContent =
-            "Your Score: " + points + " / " + questions.length;
-    }
-}
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    document.getElementById("quizBox").style.display = "none";
+    document.getElementById("resultBox").style.display = "block";
 
-function restartQuiz() {
-    startQuiz();
+    document.getElementById("score").textContent =
+      "Your Score: " + score + " / " + questions.length;
+  }
 }
 </script>
 
 </body>
 </html>
+
+
 
 
