@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - Smart Study Hub</title>
+<style>
+body{font-family:Arial;background:#fff2f8;margin:0;color:#59344d}
+header{background:#e84393;color:white;text-align:center;padding:22px}
+nav{text-align:center;background:white;padding:18px}
+nav a{color:#d63384;text-decoration:none;margin:10px;font-weight:bold}
+.container{max-width:450px;background:white;margin:35px auto;padding:30px;border-radius:20px;box-shadow:0 4px 15px #e9b5d2}
+h2{text-align:center;color:#d63384}
+input,textarea{width:100%;padding:13px;margin:10px 0;border:1px solid #e9b4d0;border-radius:9px;box-sizing:border-box;font-family:Arial}
+button{width:100%;padding:14px;background:#e84393;color:white;border:0;border-radius:10px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+<h1>📩 Contact Us</h1>
+<p>We Would Love to Hear From You!</p>
+</header>
+<nav>
+<a href="dashboard.html">Home</a>
+<a href="subjects.html">Subjects</a>
+<a href="about.html">About</a>
+</nav>
+<div class="container">
+<h2>Send Us a Message</h2>
+<form id="contactForm">
+<input type="text" placeholder="Your Name" required>
+<input type="email" placeholder="Your Email" required>
+<textarea rows="5" placeholder="Write Your Message" required></textarea>
+<button type="submit">Send Message</button>
+</form>
+</div>
+<script>
+document.getElementById("contactForm")
+.addEventListener("submit",function(e){
+e.preventDefault();
+alert("Thank you! Your message has been received in this demo.");
+this.reset();
+});
+</script>
+</body>
+</html>
