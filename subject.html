@@ -1,348 +1,143 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Study Hub - Subject Quiz</title>
-
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background: #fff0f5;
-    color: #333;
-}
-
-header {
-    background: #e75480;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-.container {
-    max-width: 950px;
-    margin: auto;
-    padding: 25px 15px;
-}
-
-h2 {
-    color: #d6336c;
-    margin-bottom: 20px;
-}
-
-.subjects {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 18px;
-}
-
-.subject {
-    background: white;
-    padding: 25px;
-    text-align: center;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px #00000015;
-    cursor: pointer;
-}
-
-.subject:hover {
-    background: #ffe0eb;
-    transform: translateY(-3px);
-}
-
-.subject h3 {
-    color: #d6336c;
-    margin-bottom: 12px;
-}
-
-button {
-    background: #e75480;
-    color: white;
-    border: none;
-    padding: 11px 20px;
-    border-radius: 7px;
-    cursor: pointer;
-    margin-top: 12px;
-}
-
-button:hover {
-    background: #d6336c;
-}
-
-#quizArea {
-    display: none;
-    background: white;
-    margin-top: 25px;
-    padding: 22px;
-    border-radius: 12px;
-}
-
-.question {
-    margin: 20px 0;
-    padding: 15px;
-    background: #fff0f5;
-    border-radius: 8px;
-}
-
-.question p {
-    font-weight: bold;
-    margin-bottom: 12px;
-}
-
-label {
-    display: block;
-    margin: 9px 0;
-    cursor: pointer;
-}
-
-#result {
-    margin-top: 20px;
-    font-size: 20px;
-    color: #d6336c;
-    font-weight: bold;
-}
-
-.back {
-    margin-bottom: 20px;
-}
-
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#fff0f5;color:#333}
+header{background:#e75480;color:white;text-align:center;padding:22px}
+.container{max-width:950px;margin:auto;padding:25px 15px}
+h2{color:#d6336c}
+.subjects{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
+.subject{background:white;padding:22px;text-align:center;border-radius:12px;box-shadow:0 3px 10px #0002}
+button{background:#e75480;color:white;border:0;padding:12px 20px;border-radius:7px;cursor:pointer;margin:8px 0;font-size:16px}
+button:hover{background:#d6336c}
+#quizArea{display:none;background:white;margin-top:25px;padding:22px;border-radius:12px}
+.question{margin:20px 0;padding:15px;background:#fff0f5;border-radius:8px}
+.question p{font-weight:bold;margin-bottom:12px}
+label{display:block;margin:10px 0;cursor:pointer}
+#result{margin-top:20px;font-size:20px;color:#d6336c;font-weight:bold}
 </style>
 </head>
-
 <body>
 
 <header>
-    <h1>📚 Smart Study Hub</h1>
-    <p>Subject Wise Quiz</p>
+<h1>📚 Smart Study Hub</h1>
+<p>Subject Wise Quiz</p>
 </header>
 
 <div class="container">
 
-    <div id="subjectArea">
-        <h2>Choose Your Subject</h2>
+<div id="subjectArea">
+<h2>Choose Your Subject</h2>
+<div class="subjects">
+<div class="subject"><h3>📐 Mathematics</h3><p>Test your maths knowledge</p><button onclick="startQuiz('Mathematics')">Start Quiz</button></div>
+<div class="subject"><h3>⚡ Physics</h3><p>Practice physics questions</p><button onclick="startQuiz('Physics')">Start Quiz</button></div>
+<div class="subject"><h3>🧪 Chemistry</h3><p>Improve your chemistry skills</p><button onclick="startQuiz('Chemistry')">Start Quiz</button></div>
+<div class="subject"><h3>💻 Computer Science</h3><p>Programming knowledge</p><button onclick="startQuiz('Computer Science')">Start Quiz</button></div>
+<div class="subject"><h3>📖 English</h3><p>Practice English</p><button onclick="startQuiz('English')">Start Quiz</button></div>
+</div>
+</div>
 
-        <div class="subjects">
+<div id="quizArea">
+<button onclick="goBack()">← Back to Subjects</button>
+<h2 id="quizTitle"></h2>
+<form id="quizForm">
+<div id="questions"></div>
+<button type="submit">Submit Quiz</button>
+</form>
+<div id="result"></div>
+</div>
 
-            <div class="subject" onclick="startQuiz('Mathematics')">
-                <h3>📐 Mathematics</h3>
-                <p>Test your maths knowledge</p>
-                <button>Start Quiz</button>
-            </div>
-
-            <div class="subject" onclick="startQuiz('Physics')">
-                <h3>⚡ Physics</h3>
-                <p>Practice physics questions</p>
-                <button>Start Quiz</button>
-            </div>
-
-            <div class="subject" onclick="startQuiz('Chemistry')">
-                <h3>🧪 Chemistry</h3>
-                <p>Improve your chemistry skills</p>
-                <button>Start Quiz</button>
-            </div>
-
-            <div class="subject" onclick="startQuiz('Computer Science')">
-                <h3>💻 Computer Science</h3>
-                <p>Test your programming knowledge</p>
-                <button>Start Quiz</button>
-            </div>
-
-            <div class="subject" onclick="startQuiz('English')">
-                <h3>📖 English</h3>
-                <p>Practice English questions</p>
-                <button>Start Quiz</button>
-            </div>
-
-        </div>
-    </div>
-
-    <div id="quizArea">
-        <button class="back" onclick="goBack()">← Back to Subjects</button>
-
-        <h2 id="quizTitle"></h2>
-
-        <form id="quizForm">
-            <div id="questions"></div>
-            <button type="submit">Submit Quiz</button>
-        </form>
-
-        <div id="result"></div>
-    </div>
+<br>
+<button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
 
 </div>
 
 <script>
-
-const quizData = {
-
-    "Mathematics": [
-        {
-            q: "What is 5 + 5?",
-            options: ["5", "10", "15", "20"],
-            answer: "10"
-        },
-        {
-            q: "What is the square of 4?",
-            options: ["8", "12", "16", "20"],
-            answer: "16"
-        },
-        {
-            q: "What is 10 × 2?",
-            options: ["10", "15", "20", "25"],
-            answer: "20"
-        }
-    ],
-
-    "Physics": [
-        {
-            q: "What is the SI unit of force?",
-            options: ["Joule", "Newton", "Watt", "Volt"],
-            answer: "Newton"
-        },
-        {
-            q: "What is the speed of light approximately?",
-            options: ["300 km/s", "300000 km/s", "150 km/s", "100 km/s"],
-            answer: "300000 km/s"
-        },
-        {
-            q: "Which instrument measures temperature?",
-            options: ["Ammeter", "Voltmeter", "Thermometer", "Barometer"],
-            answer: "Thermometer"
-        }
-    ],
-
-    "Chemistry": [
-        {
-            q: "What is the chemical formula of water?",
-            options: ["CO2", "H2O", "O2", "NaCl"],
-            answer: "H2O"
-        },
-        {
-            q: "What is the atomic number of Hydrogen?",
-            options: ["1", "2", "3", "4"],
-            answer: "1"
-        },
-        {
-            q: "Which gas do plants absorb?",
-            options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"],
-            answer: "Carbon dioxide"
-        }
-    ],
-
-    "Computer Science": [
-        {
-            q: "Which language is used in this course?",
-            options: ["C++", "HTML", "CSS", "All of these"],
-            answer: "All of these"
-        },
-        {
-            q: "Which symbol is used for address operator in C++?",
-            options: ["*", "&", "#", "@"],
-            answer: "&"
-        },
-        {
-            q: "Which keyword is used to create a class in C++?",
-            options: ["function", "class", "define", "new"],
-            answer: "class"
-        }
-    ],
-
-    "English": [
-        {
-            q: "What is the past tense of 'Go'?",
-            options: ["Goed", "Going", "Went", "Goes"],
-            answer: "Went"
-        },
-        {
-            q: "Choose the correct article: ___ apple",
-            options: ["A", "An", "The", "No article"],
-            answer: "An"
-        },
-        {
-            q: "What is the opposite of Happy?",
-            options: ["Glad", "Sad", "Joyful", "Excited"],
-            answer: "Sad"
-        }
-    ]
-
+const quizData={
+"Mathematics":[
+{q:"What is 5 + 5?",options:["5","10","15","20"],answer:"10"},
+{q:"What is the square of 4?",options:["8","12","16","20"],answer:"16"},
+{q:"What is 10 × 2?",options:["10","15","20","25"],answer:"20"}
+],
+"Physics":[
+{q:"SI unit of force?",options:["Joule","Newton","Watt","Volt"],answer:"Newton"},
+{q:"Speed of light approximately?",options:["300 km/s","300000 km/s","150 km/s","100 km/s"],answer:"300000 km/s"},
+{q:"Which instrument measures temperature?",options:["Ammeter","Voltmeter","Thermometer","Barometer"],answer:"Thermometer"}
+],
+"Chemistry":[
+{q:"Chemical formula of water?",options:["CO2","H2O","O2","NaCl"],answer:"H2O"},
+{q:"Atomic number of Hydrogen?",options:["1","2","3","4"],answer:"1"},
+{q:"Which gas do plants absorb?",options:["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"],answer:"Carbon dioxide"}
+],
+"Computer Science":[
+{q:"Which language is used in this course?",options:["C++","HTML","CSS","All of these"],answer:"All of these"},
+{q:"Address operator in C++?",options:["*","&","#","@"],answer:"&"},
+{q:"Keyword used to create a class?",options:["function","class","define","new"],answer:"class"}
+],
+"English":[
+{q:"Past tense of Go?",options:["Goed","Going","Went","Goes"],answer:"Went"},
+{q:"Choose the correct article: ___ apple",options:["A","An","The","No article"],answer:"An"},
+{q:"Opposite of Happy?",options:["Glad","Sad","Joyful","Excited"],answer:"Sad"}
+]
 };
 
-function startQuiz(subject) {
+let currentSubject="";
 
-    document.getElementById("subjectArea").style.display = "none";
-    document.getElementById("quizArea").style.display = "block";
-
-    document.getElementById("quizTitle").innerText = subject + " Quiz";
-
-    const questionsDiv = document.getElementById("questions");
-    questionsDiv.innerHTML = "";
-    document.getElementById("result").innerText = "";
-
-    const questions = quizData[subject];
-
-    questions.forEach((item, index) => {
-
-        let html = `
-        <div class="question">
-            <p>${index + 1}. ${item.q}</p>
-        `;
-
-        item.options.forEach(option => {
-            html += `
-            <label>
-                <input type="radio" name="q${index}" value="${option}" required>
-                ${option}
-            </label>
-            `;
-        });
-
-        html += `</div>`;
-        questionsDiv.innerHTML += html;
-
-    });
-
-    document.getElementById("quizForm").onsubmit = function(event) {
-        event.preventDefault();
-
-        let score = 0;
-
-        questions.forEach((item, index) => {
-            const selected = document.querySelector(
-                `input[name="q${index}"]:checked`
-            );
-
-            if (selected && selected.value === item.answer) {
-                score++;
-            }
-        });
-
-        document.getElementById("result").innerText =
-            "Your Score: " + score + " / " + questions.length;
-    };
+function startQuiz(subject){
+if(!quizData[subject]){
+alert("Subject not found!");
+return;
+}
+currentSubject=subject;
+document.getElementById("subjectArea").style.display="none";
+document.getElementById("quizArea").style.display="block";
+document.getElementById("quizTitle").textContent=subject+" Quiz";
+document.getElementById("result").textContent="";
+const area=document.getElementById("questions");
+area.innerHTML="";
+quizData[subject].forEach((item,i)=>{
+let html='<div class="question"><p>'+(i+1)+'. '+item.q+'</p>';
+item.options.forEach(option=>{
+html+='<label><input type="radio" name="q'+i+'" value="'+option+'" required> '+option+'</label>';
+});
+html+='</div>';
+area.insertAdjacentHTML("beforeend",html);
+});
 }
 
-function goBack() {
-    document.getElementById("quizArea").style.display = "none";
-    document.getElementById("subjectArea").style.display = "block";
+document.getElementById("quizForm").addEventListener("submit",function(e){
+e.preventDefault();
+let score=0;
+const questions=quizData[currentSubject];
+questions.forEach((item,i)=>{
+const selected=document.querySelector('input[name="q'+i+'"]:checked');
+if(selected && selected.value===item.answer)score++;
+});
+document.getElementById("result").textContent="Your Score: "+score+" / "+questions.length;
+});
+
+function goBack(){
+document.getElementById("quizArea").style.display="none";
+document.getElementById("subjectArea").style.display="block";
+document.getElementById("result").textContent="";
 }
 
-// Open the subject passed from dashboard.html
-const params = new URLSearchParams(window.location.search);
-const selectedSubject = params.get("subject");
+// Read subject selected from Dashboard
+const params=new URLSearchParams(window.location.search);
+const selectedSubject=params.get("subject");
 
-if (selectedSubject && quizData[selectedSubject]) {
-    startQuiz(selectedSubject);
+if(selectedSubject){
+const matched=Object.keys(quizData).find(
+s=>s.toLowerCase()===selectedSubject.trim().toLowerCase()
+);
+if(matched){
+startQuiz(matched);
 }
-
+}
 </script>
-
 </body>
 </html>
-
