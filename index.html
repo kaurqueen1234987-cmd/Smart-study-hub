@@ -4,124 +4,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Study Hub | Sign Up</title>
-
+<title>Smart Study Hub</title>
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+*{box-sizing:border-box;font-family:Arial;margin:0;padding:0}
+body{
+min-height:100vh;display:flex;justify-content:center;align-items:center;
+padding:20px;background:linear-gradient(135deg,#667eea,#764ba2,#f093fb)
 }
-
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background: linear-gradient(135deg,#667eea,#764ba2,#f093fb);
+.container{
+background:white;width:100%;max-width:420px;padding:35px 28px;
+border-radius:22px;box-shadow:0 15px 40px #3334
 }
-
-.container {
-  width: 100%;
-  max-width: 420px;
-  background: white;
-  padding: 35px 28px;
-  border-radius: 22px;
-  box-shadow: 0 15px 40px #3334;
+.logo{text-align:center;font-size:48px}
+h1{text-align:center;color:#6545bd;margin:12px 0}
+.subtitle{text-align:center;color:#777;margin-bottom:25px}
+input{
+width:100%;padding:14px;margin:9px 0;border:1px solid #ddd;
+border-radius:10px;font-size:15px
 }
-
-.logo {
-  text-align: center;
-  font-size: 48px;
+button{
+width:100%;padding:14px;margin-top:18px;border:0;border-radius:10px;
+background:linear-gradient(90deg,#667eea,#764ba2);
+color:white;font-size:17px;font-weight:bold;cursor:pointer
 }
-
-h1 {
-  text-align: center;
-  color: #6545bd;
-  margin: 10px 0;
-}
-
-.subtitle {
-  text-align: center;
-  color: #777;
-  margin-bottom: 25px;
-}
-
-input {
-  width: 100%;
-  padding: 14px;
-  margin: 9px 0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  outline: none;
-  font-size: 15px;
-}
-
-input:focus {
-  border-color: #7655d8;
-}
-
-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 18px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg,#667eea,#764ba2);
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: .6;
-}
-
-#message {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
-}
-
-.footer {
-  text-align: center;
-  margin-top: 22px;
-  color: #888;
-  font-size: 13px;
-}
+button:disabled{opacity:.6}
+#message{text-align:center;margin-top:15px;font-size:14px}
+.footer{text-align:center;margin-top:22px;color:#888;font-size:13px}
 </style>
 </head>
-
 <body>
-
 <div class="container">
-  <div class="logo">📚</div>
-  <h1>Smart Study Hub</h1>
-  <p class="subtitle">Create Your Student Account</p>
+<div class="logo">📚</div>
+<h1>Smart Study Hub</h1>
+<p class="subtitle">Create Your Student Account</p>
 
-  <form id="signupForm">
-    <input id="name" type="text"
-      placeholder="Full Name" required>
+<form id="signupForm">
+<input id="name" type="text" placeholder="Full Name" required>
+<input id="email" type="email" placeholder="Email Address" required>
+<input id="password" type="password" placeholder="Create Password" minlength="6" required>
+<button id="signupBtn" type="submit">Create Account 🚀</button>
+</form>
 
-    <input id="email" type="email"
-      placeholder="Email Address" required>
-
-    <input id="password" type="password"
-      placeholder="Create Password" minlength="6" required>
-
-    <button id="signupBtn" type="submit">
-      Create Account 🚀
-    </button>
-  </form>
-
-  <p id="message"></p>
-
-  <div class="footer">
-    Learn • Grow • Achieve 🌟
-  </div>
+<p id="message"></p>
+<div class="footer">Learn • Grow • Achieve 🌟</div>
 </div>
 
 <script>
@@ -129,61 +54,51 @@ const SHEET_URL = "https://script.google.com/macros/s/AKfycbwyLBVdPKCfPVSYlYdRYC
 
 const DASHBOARD_URL = "./dashboard.html";
 
-document.getElementById("signupForm")
-.addEventListener("submit", async function(e) {
+document.getElementById("signupForm").addEventListener("submit", async function(e){
+e.preventDefault();
 
-  e.preventDefault();
+const name = document.getElementById("name").value.trim();
+const email = document.getElementById("email").value.trim();
+const password = document.getElementById("password").value;
+const message = document.getElementById("message");
+const button = document.getElementById("signupBtn");
 
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const message = document.getElementById("message");
-  const button = document.getElementById("signupBtn");
+button.disabled = true;
+button.textContent = "Please wait...";
+message.style.color = "#6545bd";
+message.textContent = "Sending signup request...";
 
-  button.disabled = true;
-  button.textContent = "Creating Account...";
-  message.textContent = "Please wait...";
+try{
+const response = await fetch(SHEET_URL,{
+method:"POST",
+mode:"no-cors",
+body:new URLSearchParams({
+action:"signup",
+name:name,
+email:email,
+password:password
+})
+});
 
-  try {
-    const response = await fetch(SHEET_URL, {
-      method: "POST",
-      body: new URLSearchParams({
-        action: "signup",
-        name: name,
-        email: email,
-        password: password
-      })
-    });
+message.style.color="green";
+message.textContent="Signup request sent!";
 
-    const result = await response.json();
+sessionStorage.setItem("studentName",name);
+sessionStorage.setItem("studentEmail",email);
 
-    if (result.success) {
-      message.style.color = "green";
-      message.textContent = "Account created successfully!";
+setTimeout(()=>{
+window.location.href = DASHBOARD_URL;
+},1200);
 
-      // Store only basic display information.
-      sessionStorage.setItem("studentName", name);
-      sessionStorage.setItem("studentEmail", email);
-
-      setTimeout(() => {
-        window.location.href = DASHBOARD_URL;
-      }, 1000);
-
-    } else {
-      throw new Error(result.message || "Signup failed");
-    }
-
-  } catch(error) {
-    message.style.color = "red";
-    message.textContent = error.message ||
-      "Something went wrong. Please try again.";
-
-    button.disabled = false;
-    button.textContent = "Create Account 🚀";
-  }
+}catch(error){
+message.style.color="red";
+message.textContent="Connection failed. Please check Apps Script.";
+button.disabled=false;
+button.textContent="Create Account 🚀";
+}
 });
 </script>
-
 </body>
 </html>
+
 
