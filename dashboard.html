@@ -4,222 +4,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Student Dashboard - Smart Study Hub</title>
+<title>Smart Study Hub Dashboard</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: #fff5fa;
-    color: #543047;
-}
-
-header {
-    background: white;
-    padding: 20px 6%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 3px 12px #edc2d9;
-}
-
-.logo {
-    color: #d63384;
-    font-size: 23px;
-    font-weight: bold;
-}
-
-header a {
-    text-decoration: none;
-    color: #d63384;
-    font-weight: bold;
-}
-
-.welcome {
-    padding: 45px 7%;
-    background: linear-gradient(135deg,#ffd6e9,#e7c6ff);
-}
-
-.welcome h1 {
-    color: #bd2775;
-    margin-bottom: 12px;
-}
-
-.welcome p {
-    font-size: 17px;
-}
-
-.search {
-    text-align: center;
-    padding: 30px 15px;
-}
-
-.search input {
-    width: 80%;
-    max-width: 550px;
-    padding: 15px;
-    border: 1px solid #e8a9ca;
-    border-radius: 25px;
-    font-size: 15px;
-}
-
-.section {
-    padding: 30px 7%;
-}
-
-.section h2 {
-    color: #d63384;
-    margin-bottom: 25px;
-}
-
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    width: 210px;
-    padding: 25px;
-    text-align: center;
-    border-radius: 16px;
-    box-shadow: 0 4px 14px #edc2d9;
-}
-
-.card h3 {
-    color: #d63384;
-    margin-bottom: 12px;
-}
-
-.card button {
-    margin-top: 15px;
-    padding: 10px 18px;
-    border: none;
-    background: #e84393;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-footer {
-    background: #d63384;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#fff5fa;color:#543047}
+header{background:white;padding:20px 6%;display:flex;justify-content:space-between;box-shadow:0 3px 12px #edc2d9}
+.logo{color:#d63384;font-size:22px;font-weight:bold}
+header a{color:#d63384;text-decoration:none;font-weight:bold}
+.welcome{padding:40px 7%;background:linear-gradient(135deg,#ffd6e9,#e7c6ff)}
+.welcome h1{color:#bd2775;margin-bottom:12px}
+.search{text-align:center;padding:25px}
+.search input{width:80%;max-width:550px;padding:14px;border:1px solid #e8a9ca;border-radius:25px}
+.section{padding:30px 7%}
+.section h2{color:#d63384;margin-bottom:20px}
+.cards{display:flex;flex-wrap:wrap;gap:20px}
+.card{background:white;width:210px;padding:25px;text-align:center;border-radius:16px;box-shadow:0 4px 14px #edc2d9}
+.card h3{color:#d63384;margin-bottom:12px}
+button{margin-top:15px;padding:11px 20px;border:0;background:#e84393;color:white;border-radius:20px;cursor:pointer}
+.quiz-box{display:none;background:white;padding:22px;border-radius:16px;box-shadow:0 4px 14px #edc2d9;margin-top:20px}
+.question{padding:16px 0;border-bottom:1px solid #f3d5e5}
+.question p{font-weight:bold;margin-bottom:10px}
+.question label{display:block;padding:7px;cursor:pointer}
+.question input{margin-right:8px}
+#result{display:none;background:#fff0f7;padding:20px;margin-top:20px;border-radius:12px;text-align:center}
+footer{background:#d63384;color:white;text-align:center;padding:20px;margin-top:30px}
 </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">🌸 Smart Study Hub</div>
-    <a href="index.html">Logout</a>
+<div class="logo">🌸 Smart Study Hub</div>
+<a href="index.html">Logout</a>
 </header>
 
 <section class="welcome">
-    <h1>Welcome to Your Study Dashboard! 🌷</h1>
-    <p>Learn Better, Study Smarter, Achieve More!</p>
+<h1>Welcome to Your Study Dashboard! 🌷</h1>
+<p>Learn Better, Study Smarter, Achieve More!</p>
 </section>
 
 <div class="search">
-    <input type="search"
-    id="searchBox"
-    placeholder="🔍 Search your subject...">
+<input type="search" id="searchBox" placeholder="🔍 Search your subject...">
 </div>
 
 <section class="section">
+<h2>📚 Explore Subjects</h2>
+<div class="cards" id="subjectCards">
 
-    <h2>📚 Explore Subjects</h2>
+<div class="card">
+<h3>📐 Mathematics</h3>
+<p>Practice Maths</p>
+<button onclick="openSubject('math')">Start Quiz</button>
+</div>
 
-    <div class="cards" id="subjectCards">
+<div class="card">
+<h3>⚡ Physics</h3>
+<p>Practice Physics</p>
+<button onclick="openSubject('physics')">Start Quiz</button>
+</div>
 
-        <div class="card">
-            <h3>📐 Mathematics</h3>
-            <p>Learn Maths Easily</p>
-            <button onclick="openSubject('Mathematics')">Explore</button>
-        </div>
+<div class="card">
+<h3>🧪 Chemistry</h3>
+<p>Practice Chemistry</p>
+<button onclick="openSubject('chemistry')">Start Quiz</button>
+</div>
 
-        <div class="card">
-            <h3>⚡ Physics</h3>
-            <p>Understand Physics</p>
-            <button onclick="openSubject('Physics')">Explore</button>
-        </div>
+<div class="card">
+<h3>💻 Computer Science</h3>
+<p>Practice Programming</p>
+<button onclick="openSubject('computer')">Start Quiz</button>
+</div>
 
-        <div class="card">
-            <h3>🧪 Chemistry</h3>
-            <p>Explore Chemistry</p>
-            <button onclick="openSubject('Chemistry')">Explore</button>
-        </div>
+<div class="card">
+<h3>📖 English</h3>
+<p>Practice English</p>
+<button onclick="openSubject('english')">Start Quiz</button>
+</div>
 
-        <div class="card">
-            <h3>💻 Computer Science</h3>
-            <p>Learn Programming</p>
-            <button onclick="openSubject('Computer Science')">Explore</button>
-        </div>
-
-        <div class="card">
-            <h3>📖 English</h3>
-            <p>Improve Your English</p>
-            <button onclick="openSubject('English')">Explore</button>
-        </div>
-
-    </div>
-
+</div>
 </section>
 
 <section class="section">
-    <h2>🎥 Educational Videos</h2>
-    <p>Watch educational videos and understand difficult topics easily.</p>
+<div class="quiz-box" id="quizBox">
+<h2 id="quizTitle">Subject Quiz</h2>
+<p>5 Questions | 2 Marks Each | Total 10 Marks</p>
+<form id="quizForm">
+<div id="questions"></div>
+<button type="submit">Submit Test</button>
+</form>
+
+<div id="result">
+<h2>Your Result</h2>
+<h3 id="score"></h3>
+<p id="feedback"></p>
+<button type="button" onclick="resetQuiz()">Try Another Quiz</button>
+</div>
+</div>
 </section>
 
 <section class="section">
-    <h2>📝 Study Notes</h2>
-    <p>Read notes and improve your learning every day.</p>
+<h2>📝 Study Notes</h2>
+<p>Read notes and improve your learning every day.</p>
 </section>
 
 <footer>
-    <p>© 2026 Smart Study Hub | Happy Learning 🌸</p>
+© 2026 Smart Study Hub | Happy Learning 🌸
 </footer>
 
 <script>
+const quizData={
+math:{
+title:"Mathematics Quiz",
+questions:[
+["Derivative of x²?",["x","2x","x³","2"],1],
+["5 × 4 = ?",["15","10","20","25"],2],
+["Integration of 1 is?",["x + C","0","1/x","x²"],0],
+["10² = ?",["20","100","50","10"],1],
+["Derivative of sin x?",["-sin x","cos x","tan x","1"],1]
+]},
+physics:{
+title:"Physics Quiz",
+questions:[
+["SI unit of force?",["Joule","Newton","Watt","Volt"],1],
+["Speed formula?",["Distance/Time","Time/Distance","Mass×Time","Force/Area"],0],
+["SI unit of current?",["Volt","Ohm","Ampere","Watt"],2],
+["Which is a scalar quantity?",["Force","Velocity","Speed","Displacement"],2],
+["Acceleration is rate of change of?",["Distance","Velocity","Mass","Force"],1]
+]},
+chemistry:{
+title:"Chemistry Quiz",
+questions:[
+["Symbol of Oxygen?",["O","Ox","Og","Om"],0],
+["H2O is?",["Salt","Water","Oxygen","Hydrogen"],1],
+["Atomic number of Hydrogen?",["2","0","1","8"],2],
+["pH of neutral water?",["0","7","14","5"],1],
+["Common salt formula?",["HCl","NaCl","KCl","H2O"],1]
+]},
+computer:{
+title:"Computer Science Quiz",
+questions:[
+["Which language are we practising?",["HTML","C++","CSS","SQL"],1],
+["Which symbol ends a C++ statement?",[":",";","!","."],1],
+["Starting function in C++?",["start()","main()","run()","begin()"],1],
+["Address operator?",["*","&","%","#"],1],
+["Which header supports cout?",["iostream","math.h","string","time.h"],0]
+]},
+english:{
+title:"English Quiz",
+questions:[
+["Article before apple?",["A","An","The","No article"],1],
+["Past tense of go?",["Goed","Going","Went","Gone"],2],
+["Opposite of happy?",["Glad","Sad","Kind","Joyful"],1],
+["Correct spelling?",["Beautiful","Beautifull","Beutiful","Butiful"],0],
+["Correct sentence?",["She go to college","She goes to college","She going college","She gone college"],1]
+]}
+};
 
-// Google Configuration - Add Later
-const GOOGLE_CONFIG = "";
+let currentQuiz=null;
 
-// Firebase Configuration - Add Later
-const FIREBASE_CONFIG = {};
+function openSubject(subject){
+currentQuiz=quizData[subject];
+document.getElementById("quizTitle").textContent=currentQuiz.title;
+document.getElementById("quizBox").style.display="block";
+document.getElementById("result").style.display="none";
 
-// Subject search
-document.getElementById("searchBox")
-.addEventListener("input", function() {
+const area=document.getElementById("questions");
+area.innerHTML="";
 
-    const search = this.value.toLowerCase();
+currentQuiz.questions.forEach((q,index)=>{
+let html='<div class="question"><p>'+(index+1)+'. '+q[0]+'</p>';
 
-    document.querySelectorAll(".card").forEach(card => {
-
-        card.style.display =
-        card.innerText.toLowerCase().includes(search)
-        ? "block" : "none";
-
-    });
-
+q[1].forEach((option,i)=>{
+html+='<label><input type="radio" name="q'+index+'" value="'+i+'" required> '+option+'</label>';
 });
 
-function openSubject(subject) {
-    alert("You selected " + subject +
-    ". Study videos will be added soon!");
+html+='</div>';
+area.innerHTML+=html;
+});
+
+document.getElementById("quizBox").scrollIntoView({behavior:"smooth"});
 }
 
+document.getElementById("quizForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+let marks=0;
+
+currentQuiz.questions.forEach((q,index)=>{
+const answer=document.querySelector('input[name="q'+index+'"]:checked');
+if(answer && Number(answer.value)===q[2]){
+marks+=2;
+}
+});
+
+document.getElementById("score").textContent="Your Score: "+marks+" / 10";
+
+document.getElementById("feedback").textContent=
+marks>=8?"Excellent work! 🎉":
+marks>=6?"Good job! Keep practising!":
+"Keep learning and try again!";
+
+document.getElementById("result").style.display="block";
+document.getElementById("result").scrollIntoView({behavior:"smooth"});
+});
+
+function resetQuiz(){
+document.getElementById("quizForm").reset();
+document.getElementById("result").style.display="none";
+document.getElementById("quizBox").style.display="none";
+document.getElementById("subjectCards").scrollIntoView({behavior:"smooth"});
+}
+
+document.getElementById("searchBox").addEventListener("input",function(){
+const value=this.value.toLowerCase();
+
+document.querySelectorAll("#subjectCards .card").forEach(card=>{
+card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
+});
+});
 </script>
 
 </body>
 </html>
+
+
+        
