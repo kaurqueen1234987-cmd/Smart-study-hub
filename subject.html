@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subjects - Smart Study Hub</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial;background:#fff2f8;margin:0;color:#59344d}
+header{background:#e84393;color:white;padding:22px;text-align:center}
+nav{text-align:center;background:white;padding:18px}
+nav a{color:#d63384;text-decoration:none;margin:10px;font-weight:bold}
+h1,h2{text-align:center;color:#d63384}
+.container{padding:30px;display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.card{background:white;padding:28px;width:220px;text-align:center;border-radius:18px;box-shadow:0 4px 15px #e9b5d2}
+button{background:#e84393;color:white;border:0;padding:12px 22px;border-radius:20px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+<h1>🌸 Smart Study Hub</h1>
+<p>Choose Your Favourite Subject</p>
+</header>
+<nav>
+<a href="dashboard.html">Home</a>
+<a href="videos.html">Videos</a>
+<a href="notes.html">Notes</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
+<h2>📚 Explore Subjects</h2>
+<div class="container">
+<div class="card"><h3>📐 Mathematics</h3><p>Learn Maths Easily</p><button onclick="openVideo('Mathematics')">Explore</button></div>
+<div class="card"><h3>⚡ Physics</h3><p>Understand Physics</p><button onclick="openVideo('Physics')">Explore</button></div>
+<div class="card"><h3>🧪 Chemistry</h3><p>Learn Chemistry</p><button onclick="openVideo('Chemistry')">Explore</button></div>
+<div class="card"><h3>💻 Computer Science</h3><p>Learn Programming</p><button onclick="openVideo('Computer Science')">Explore</button></div>
+<div class="card"><h3>📖 English</h3><p>Improve Your English</p><button onclick="openVideo('English')">Explore</button></div>
+</div>
+<script>
+function openVideo(subject){
+window.location.href="videos.html?subject="+encodeURIComponent(subject);
+}
+</script>
+</body>
+</html>
