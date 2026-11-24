@@ -2,229 +2,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Study Hub - Sign Up</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Study Hub - Signup</title>
 
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background: linear-gradient(135deg,#667eea,#764ba2,#f093fb);
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #101d42, #5541a5);
+      padding: 20px;
+    }
 
-.container {
-  width: 100%;
-  max-width: 430px;
-  background: white;
-  padding: 35px 28px;
-  border-radius: 24px;
-  box-shadow: 0 15px 40px #3334;
-}
+    .container {
+      background: white;
+      width: 100%;
+      max-width: 420px;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 10px 35px #0004;
+    }
 
-.logo {
-  text-align: center;
-  font-size: 50px;
-}
+    h1 {
+      text-align: center;
+      color: #263779;
+      margin-bottom: 8px;
+    }
 
-h1 {
-  text-align: center;
-  color: #6545bd;
-  margin: 12px 0;
-}
+    p {
+      text-align: center;
+      color: #666;
+    }
 
-.subtitle {
-  text-align: center;
-  color: #777;
-  margin-bottom: 25px;
-}
+    input, select {
+      width: 100%;
+      padding: 13px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
 
-input {
-  width: 100%;
-  padding: 15px;
-  margin: 9px 0;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  font-size: 15px;
-  outline: none;
-}
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #5142b5;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
 
-input:focus {
-  border-color: #7655d8;
-  box-shadow: 0 0 5px #7655d855;
-}
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
 
-button {
-  width: 100%;
-  padding: 15px;
-  margin-top: 18px;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(90deg,#667eea,#764ba2);
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: wait;
-}
-
-#message {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
-  overflow-wrap: anywhere;
-}
-
-.footer {
-  text-align: center;
-  margin-top: 22px;
-  color: #888;
-  font-size: 13px;
-}
-</style>
+    #message {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
+    <h1>Smart Study Hub</h1>
+    <p>Create Your Student Account</p>
 
-  <div class="logo">📚</div>
+    <form id="signupForm">
 
-  <h1>Smart Study Hub</h1>
+      <input
+        type="text"
+        id="name"
+        placeholder="Enter Full Name"
+        required
+      >
 
-  <p class="subtitle">
-    Create Your Student Account
-  </p>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter Email Address"
+        required
+      >
 
-  <form id="signupForm">
+      <select id="course" required>
+        <option value="">Select Your Course</option>
+        <option value="BTech CSE">BTech CSE</option>
+        <option value="BCA">BCA</option>
+        <option value="BSc">BSc</option>
+        <option value="Other">Other</option>
+      </select>
 
-    <input
-      id="name"
-      type="text"
-      placeholder="Full Name"
-      required
-    >
+      <button type="submit" id="signupBtn">
+        Sign Up
+      </button>
 
-    <input
-      id="email"
-      type="email"
-      placeholder="Email Address"
-      required
-    >
+    </form>
 
-    <input
-      id="course"
-      type="text"
-      placeholder="Your Course (e.g. BTech CSE)"
-      required
-    >
-
-    <button id="signupBtn" type="submit">
-      Create Account 🚀
-    </button>
-
-  </form>
-
-  <p id="message" role="status"></p>
-
-  <div class="footer">
-    Learn • Grow • Achieve 🌟
+    <div id="message"></div>
   </div>
 
-</div>
+  <script>
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbwyLBVdPKCfPVSYlYdRYCMsvUIArcqjTUclDMVGMUcQUbqSsu0drVrkLVB2z1HzpgkUIQ/exec";
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("signupForm");
+    const button = document.getElementById("signupBtn");
+    const message = document.getElementById("message");
 
-  const SHEET_URL =
-  "https://script.google.com/macros/s/AKfycbwyLBVdPKCfPVSYlYdRYCMsvUIArcqjTUclDMVGMUcQUbqSsu0drVrkLVB2z1HzpgkUIQ/exec";
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
 
-  const form = document.getElementById("signupForm");
-  const button = document.getElementById("signupBtn");
-  const message = document.getElementById("message");
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const course = document.getElementById("course").value;
 
-  form.addEventListener("submit", async function (e) {
-
-    e.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const course = document.getElementById("course").value.trim();
-
-    if (!name || !email || !course) {
-      message.style.color = "red";
-      message.textContent = "Please fill all fields.";
-      return;
-    }
-
-    button.disabled = true;
-    button.textContent = "Submitting...";
-    message.style.color = "#6545bd";
-    message.textContent = "Connecting to Google Sheets...";
-
-    try {
-
-      const response = await fetch(SHEET_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          course: course,
-          uid: ""
-        })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || "Registration failed.");
+      if (!name || !email || !course) {
+        message.textContent = "Please fill all details.";
+        return;
       }
 
-      sessionStorage.setItem("studentName", name);
-      sessionStorage.setItem("studentEmail", email);
+      button.disabled = true;
+      button.textContent = "Submitting...";
+      message.textContent = "Please wait...";
 
-      message.style.color = "green";
-      message.textContent = "Registration successful!";
+      try {
+        const response = await fetch(SHEET_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            course: course,
+            uid: ""
+          })
+        });
 
-      button.textContent = "Success ✓";
+        const result = await response.json();
 
-      setTimeout(function () {
-        window.location.href = "./dashboard.html";
-      }, 1000);
+        if (result.success) {
+          message.textContent = "Registration successful!";
+          message.style.color = "green";
 
-    } catch (error) {
+          setTimeout(function() {
+            window.location.href = "./dashboard.html";
+          }, 1000);
 
-      message.style.color = "red";
-      message.textContent =
-        "Signup failed: " + error.message;
+        } else {
+          throw new Error(result.message || "Registration failed");
+        }
 
-      button.disabled = false;
-      button.textContent = "Create Account 🚀";
+      } catch (error) {
+        message.textContent =
+          "Data save nahi hua: " + error.message;
+        message.style.color = "red";
 
-    }
-
-  });
-
-});
-</script>
+        button.disabled = false;
+        button.textContent = "Sign Up";
+      }
+    });
+  </script>
 
 </body>
 </html>
-
