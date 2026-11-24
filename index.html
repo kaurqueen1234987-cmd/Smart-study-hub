@@ -1,173 +1,135 @@
-     
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Study Hub - Sign Up</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
-      padding: 20px;
-    }
-
-    .container {
-      background: white;
-      width: 100%;
-      max-width: 400px;
-      padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 8px 25px #77777740;
-    }
-
-    h1 {
-      text-align: center;
-      color: #a64ca6;
-      margin-bottom: 8px;
-    }
-
-    p {
-      text-align: center;
-      color: #777;
-    }
-
-    input, select, button {
-      width: 100%;
-      padding: 13px;
-      margin-top: 15px;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-
-    input, select {
-      border: 1px solid #ddd;
-    }
-
-    button {
-      background: #c45acb;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background: #a640ad;
-    }
-
-    #message {
-      font-size: 14px;
-      margin-top: 15px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Hub</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#f0f4ff;color:#222}
+header{background:#243b80;color:white;text-align:center;padding:22px}
+nav{background:#172554;display:flex;flex-wrap:wrap;justify-content:center}
+nav button{background:none;color:white;border:0;padding:14px;cursor:pointer}
+.page{display:none;background:white;max-width:800px;margin:25px auto;padding:25px;border-radius:12px}
+.page.active{display:block}
+input,select{width:100%;padding:12px;margin:10px 0;border:1px solid #bbb;border-radius:6px}
+.action{background:#243b80;color:white;padding:12px 22px;border:0;border-radius:6px;cursor:pointer}
+footer{background:#172554;color:white;text-align:center;padding:20px}
+</style>
 </head>
-
 <body>
 
-  <div class="container">
-    <h1>Smart Study Hub</h1>
-    <p>Create Your Student Account</p>
+<header>
+<h1>Student Hub</h1>
+<p>Your Learning, Your Future</p>
+</header>
 
-    <form id="signupForm">
+<nav>
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('signup')">Sign Up</button>
+<button onclick="showPage('dashboard')">Dashboard</button>
+<button onclick="showPage('courses')">Courses</button>
+<button onclick="showPage('about')">About Us</button>
+<button onclick="showPage('contact')">Contact</button>
+</nav>
 
-      <input
-        type="text"
-        id="name"
-        placeholder="Enter Your Name"
-        required
-      >
+<section id="home" class="page active">
+<h2>Welcome to Student Hub!</h2>
+<p>Your learning journey starts here.</p>
+<button class="action" onclick="showPage('signup')">Get Started</button>
+</section>
 
-      <input
-        type="email"
-        id="email"
-        placeholder="Enter Your Email"
-        required
-      >
+<section id="signup" class="page">
+<h2>Student Sign Up</h2>
+<form id="signupForm">
+<input name="name" placeholder="Full Name" required>
+<input name="email" type="email" placeholder="Email Address" required>
+<input name="phone" type="tel" placeholder="Phone Number" required>
+<select name="course" required>
+<option value="">Select Course</option>
+<option>Web Development</option>
+<option>Python</option>
+<option>C++</option>
+<option>Computer Basics</option>
+</select>
+<button class="action" id="submitBtn" type="submit">Sign Up</button>
+</form>
+<p id="message"></p>
+</section>
 
-      <select id="course" required>
-        <option value="">Select Your Course</option>
-        <option value="BTech">BTech</option>
-        <option value="BCA">BCA</option>
-        <option value="BBA">BBA</option>
-        <option value="Other">Other</option>
-      </select>
+<section id="dashboard" class="page">
+<h2>Student Dashboard</h2>
+<h3 id="welcome">Welcome to Student Hub!</h3>
+<p>Your registration has been submitted.</p>
+<p>Explore your learning journey with us.</p>
+</section>
 
-      <input
-        type="password"
-        id="password"
-        placeholder="Create Password"
-        required
-      >
+<section id="courses" class="page">
+<h2>Our Courses</h2>
+<h3>Web Development</h3>
+<p>Learn HTML, CSS and JavaScript.</p>
+<h3>Python Programming</h3>
+<p>Learn programming fundamentals.</p>
+<h3>C++ Programming</h3>
+<p>Learn object-oriented programming.</p>
+</section>
 
-      <button type="submit" id="signupBtn">
-        Sign Up
-      </button>
+<section id="about" class="page">
+<h2>About Us</h2>
+<p>Student Hub helps students learn technology and develop skills.</p>
+</section>
 
-      <p id="message"></p>
+<section id="contact" class="page">
+<h2>Contact Us</h2>
+<p>Email: studenthub@example.com</p>
+<p>Thank you for visiting Student Hub!</p>
+</section>
 
-    </form>
-  </div>
+<footer>
+<p>© 2026 Student Hub | All Rights Reserved</p>
+</footer>
 
-  <script>
-    // Paste your Google Apps Script Web App URL here
-    const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwyLBVdPKCfPVSYlYdRYCMsvUIArcqjTUclDMVGMUcQUbqSsu0drVrkLVB2z1HzpgkUIQ/exec";
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbwyLBVdPKCfPVSYlYdRYCMsvUIArcqjTUclDMVGMUcQUbqSsu0drVrkLVB2z1HzpgkUIQ/exec";
 
-    const form = document.getElementById("signupForm");
-    const message = document.getElementById("message");
-    const button = document.getElementById("signupBtn");
+function showPage(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ window.scrollTo(0,0);
+}
 
-    form.addEventListener("submit", async function(event) {
-      event.preventDefault();
+document.getElementById("signupForm").addEventListener("submit", async function(e){
+ e.preventDefault();
 
-      const studentData = {
-        name: document.getElementById("name").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        course: document.getElementById("course").value
-      };
+ const form=this;
+ const btn=document.getElementById("submitBtn");
+ const msg=document.getElementById("message");
 
-      if (GOOGLE_SHEET_URL === "PASTE_YOUR_DEPLOY_URL_HERE") {
-        message.textContent = "Please add your Google Sheets URL first.";
-        return;
-      }
+ btn.disabled=true;
+ btn.textContent="Submitting...";
+ msg.textContent="Please wait...";
 
-      button.disabled = true;
-      button.textContent = "Submitting...";
+ try{
+   await fetch(scriptURL,{
+     method:"POST",
+     body:new FormData(form),
+     mode:"no-cors"
+   });
 
-      try {
-        await fetch(GOOGLE_SHEET_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-          },
-          body: JSON.stringify(studentData)
-        });
+   const name=form.elements["name"].value;
+   document.getElementById("welcome").textContent="Welcome, "+name+"!";
+   form.reset();
+   msg.textContent="Registration submitted!";
+   showPage("dashboard");
 
-        message.textContent =
-          "Request sent! Please check your Google Sheet.";
+ }catch(error){
+   msg.textContent="Submission failed. Please try again.";
+ }
 
-        form.reset();
-
-      } catch (error) {
-        message.textContent =
-          "Something went wrong. Please try again.";
-      }
-
-      button.disabled = false;
-      button.textContent = "Sign Up";
-    });
-  </script>
-
+ btn.disabled=false;
+ btn.textContent="Sign Up";
+});
+</script>
 </body>
 </html>
