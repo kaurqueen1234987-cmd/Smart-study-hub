@@ -4,101 +4,227 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Study Hub</title>
+<title>Smart Study Hub - Sign Up</title>
+
 <style>
-*{box-sizing:border-box;font-family:Arial;margin:0;padding:0}
-body{
-min-height:100vh;display:flex;justify-content:center;align-items:center;
-padding:20px;background:linear-gradient(135deg,#667eea,#764ba2,#f093fb)
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
-.container{
-background:white;width:100%;max-width:420px;padding:35px 28px;
-border-radius:22px;box-shadow:0 15px 40px #3334
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg,#667eea,#764ba2,#f093fb);
 }
-.logo{text-align:center;font-size:48px}
-h1{text-align:center;color:#6545bd;margin:12px 0}
-.subtitle{text-align:center;color:#777;margin-bottom:25px}
-input{
-width:100%;padding:14px;margin:9px 0;border:1px solid #ddd;
-border-radius:10px;font-size:15px
+
+.container {
+  width: 100%;
+  max-width: 430px;
+  background: white;
+  padding: 35px 28px;
+  border-radius: 24px;
+  box-shadow: 0 15px 40px #3334;
 }
-button{
-width:100%;padding:14px;margin-top:18px;border:0;border-radius:10px;
-background:linear-gradient(90deg,#667eea,#764ba2);
-color:white;font-size:17px;font-weight:bold;cursor:pointer
+
+.logo {
+  text-align: center;
+  font-size: 50px;
 }
-button:disabled{opacity:.6}
-#message{text-align:center;margin-top:15px;font-size:14px}
-.footer{text-align:center;margin-top:22px;color:#888;font-size:13px}
+
+h1 {
+  text-align: center;
+  color: #6545bd;
+  margin: 12px 0;
+}
+
+.subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 25px;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  margin: 9px 0;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #7655d8;
+  box-shadow: 0 0 5px #7655d855;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg,#667eea,#764ba2);
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+#message {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 22px;
+  color: #888;
+  font-size: 13px;
+}
 </style>
 </head>
+
 <body>
+
 <div class="container">
-<div class="logo">📚</div>
-<h1>Smart Study Hub</h1>
-<p class="subtitle">Create Your Student Account</p>
 
-<form id="signupForm">
-<input id="name" type="text" placeholder="Full Name" required>
-<input id="email" type="email" placeholder="Email Address" required>
-<input id="password" type="password" placeholder="Create Password" minlength="6" required>
-<button id="signupBtn" type="submit">Create Account 🚀</button>
-</form>
+  <div class="logo">📚</div>
 
-<p id="message"></p>
-<div class="footer">Learn • Grow • Achieve 🌟</div>
+  <h1>Smart Study Hub</h1>
+
+  <p class="subtitle">
+    Create Your Student Account
+  </p>
+
+  <form id="signupForm">
+
+    <input
+      id="name"
+      type="text"
+      placeholder="Full Name"
+      required
+    >
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Email Address"
+      required
+    >
+
+    <input
+      id="course"
+      type="text"
+      placeholder="Your Course (e.g. BTech CSE)"
+      required
+    >
+
+    <button id="signupBtn" type="submit">
+      Create Account 🚀
+    </button>
+
+  </form>
+
+  <p id="message" role="status"></p>
+
+  <div class="footer">
+    Learn • Grow • Achieve 🌟
+  </div>
+
 </div>
 
 <script>
-const SHEET_URL = "https://script.google.com/macros/library/d/1JUozIOEeTwWnBOi8X199JoY9P2BY2ooqrtMFytawyJ2Swi5EBsDdzIHR/2;
+document.addEventListener("DOMContentLoaded", function () {
 
-const DASHBOARD_URL = "./dashboard.html";
+  const SHEET_URL =
+  "https://script.google.com/macros/s/AKfycbwyLBVdPKCfPVSYlYdRYCMsvUIArcqjTUclDMVGMUcQUbqSsu0drVrkLVB2z1HzpgkUIQ/exec";
 
-document.getElementById("signupForm").addEventListener("submit", async function(e){
-e.preventDefault();
+  const form = document.getElementById("signupForm");
+  const button = document.getElementById("signupBtn");
+  const message = document.getElementById("message");
 
-const name = document.getElementById("name").value.trim();
-const email = document.getElementById("email").value.trim();
-const password = document.getElementById("password").value;
-const message = document.getElementById("message");
-const button = document.getElementById("signupBtn");
+  form.addEventListener("submit", async function (e) {
 
-button.disabled = true;
-button.textContent = "Please wait...";
-message.style.color = "#6545bd";
-message.textContent = "Sending signup request...";
+    e.preventDefault();
 
-try{
-const response = await fetch(SHEET_URL,{
-method:"POST",
-mode:"no-cors",
-body:new URLSearchParams({
-action:"signup",
-name:name,
-email:email,
-password:password
-})
-});
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const course = document.getElementById("course").value.trim();
 
-message.style.color="green";
-message.textContent="Signup request sent!";
+    if (!name || !email || !course) {
+      message.style.color = "red";
+      message.textContent = "Please fill all fields.";
+      return;
+    }
 
-sessionStorage.setItem("studentName",name);
-sessionStorage.setItem("studentEmail",email);
+    button.disabled = true;
+    button.textContent = "Submitting...";
+    message.style.color = "#6545bd";
+    message.textContent = "Connecting to Google Sheets...";
 
-setTimeout(()=>{
-window.location.href = DASHBOARD_URL;
-},1200);
+    try {
 
-}catch(error){
-message.style.color="red";
-message.textContent="Connection failed. Please check Apps Script.";
-button.disabled=false;
-button.textContent="Create Account 🚀";
-}
+      const response = await fetch(SHEET_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          course: course,
+          uid: ""
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Registration failed.");
+      }
+
+      sessionStorage.setItem("studentName", name);
+      sessionStorage.setItem("studentEmail", email);
+
+      message.style.color = "green";
+      message.textContent = "Registration successful!";
+
+      button.textContent = "Success ✓";
+
+      setTimeout(function () {
+        window.location.href = "./dashboard.html";
+      }, 1000);
+
+    } catch (error) {
+
+      message.style.color = "red";
+      message.textContent =
+        "Signup failed: " + error.message;
+
+      button.disabled = false;
+      button.textContent = "Create Account 🚀";
+
+    }
+
+  });
+
 });
 </script>
+
 </body>
 </html>
-
 
