@@ -7,226 +7,287 @@
 <title>Smart Study Hub Dashboard</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#fff5fa;color:#543047}
-header{background:white;padding:20px 6%;display:flex;justify-content:space-between;box-shadow:0 3px 12px #edc2d9}
-.logo{color:#d63384;font-size:22px;font-weight:bold}
-header a{color:#d63384;text-decoration:none;font-weight:bold}
-.welcome{padding:40px 7%;background:linear-gradient(135deg,#ffd6e9,#e7c6ff)}
-.welcome h1{color:#bd2775;margin-bottom:12px}
-.search{text-align:center;padding:25px}
-.search input{width:80%;max-width:550px;padding:14px;border:1px solid #e8a9ca;border-radius:25px}
-.section{padding:30px 7%}
-.section h2{color:#d63384;margin-bottom:20px}
-.cards{display:flex;flex-wrap:wrap;gap:20px}
-.card{background:white;width:210px;padding:25px;text-align:center;border-radius:16px;box-shadow:0 4px 14px #edc2d9}
-.card h3{color:#d63384;margin-bottom:12px}
-button{margin-top:15px;padding:11px 20px;border:0;background:#e84393;color:white;border-radius:20px;cursor:pointer}
-.quiz-box{display:none;background:white;padding:22px;border-radius:16px;box-shadow:0 4px 14px #edc2d9;margin-top:20px}
-.question{padding:16px 0;border-bottom:1px solid #f3d5e5}
-.question p{font-weight:bold;margin-bottom:10px}
-.question label{display:block;padding:7px;cursor:pointer}
-.question input{margin-right:8px}
-#result{display:none;background:#fff0f7;padding:20px;margin-top:20px;border-radius:12px;text-align:center}
-footer{background:#d63384;color:white;text-align:center;padding:20px;margin-top:30px}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #fff0f5;
+    color: #333;
+}
+
+header {
+    background: #e75480;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+header button {
+    background: white;
+    color: #e75480;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 18px;
+}
+
+.welcome {
+    text-align: center;
+    padding: 25px 10px;
+}
+
+.welcome h2 {
+    color: #d6336c;
+    margin-bottom: 10px;
+}
+
+.search {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #e8a0b5;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+.section {
+    margin-top: 30px;
+}
+
+.section h2 {
+    color: #d6336c;
+    margin-bottom: 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 18px;
+}
+
+.card, .feature {
+    background: white;
+    padding: 25px 15px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 3px 10px #00000015;
+}
+
+.card h3, .feature h3 {
+    color: #d6336c;
+    margin-bottom: 12px;
+}
+
+.card p, .feature p {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.card:hover, .feature:hover {
+    background: #ffe0eb;
+}
+
+.action {
+    background: #e75480;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.action:hover {
+    background: #d6336c;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+footer {
+    background: #e75480;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">🌸 Smart Study Hub</div>
-<a href="index.html">Logout</a>
+    <h1>📚 Smart Study Hub</h1>
+    <button onclick="logout()">Logout</button>
 </header>
 
-<section class="welcome">
-<h1>Welcome to Your Study Dashboard! 🌷</h1>
-<p>Learn Better, Study Smarter, Achieve More!</p>
-</section>
+<div class="container">
 
-<div class="search">
-<input type="search" id="searchBox" placeholder="🔍 Search your subject...">
+    <div class="welcome">
+        <h2>Welcome to Smart Study Hub!</h2>
+        <p>Learn, Practice and Improve Your Knowledge.</p>
+    </div>
+
+    <input
+        type="text"
+        id="searchBox"
+        class="search"
+        placeholder="Search your subject..."
+    >
+
+    <section class="section">
+        <h2>📖 My Subjects</h2>
+
+        <div class="cards" id="subjectCards">
+
+            <div class="card">
+                <h3>📐 Mathematics</h3>
+                <p>Practice Mathematics questions.</p>
+                <button class="action" onclick="openQuiz('Mathematics')">
+                    Start Quiz
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>⚡ Physics</h3>
+                <p>Practice Physics questions.</p>
+                <button class="action" onclick="openQuiz('Physics')">
+                    Start Quiz
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>🧪 Chemistry</h3>
+                <p>Improve your Chemistry knowledge.</p>
+                <button class="action" onclick="openQuiz('Chemistry')">
+                    Start Quiz
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>💻 Computer Science</h3>
+                <p>Practice programming concepts.</p>
+                <button class="action" onclick="openQuiz('Computer Science')">
+                    Start Quiz
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>📚 English</h3>
+                <p>Improve your English skills.</p>
+                <button class="action" onclick="openQuiz('English')">
+                    Start Quiz
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🌟 Study Features</h2>
+
+        <div class="features">
+
+            <div class="feature">
+                <h3>🧠 Subject-wise Quiz</h3>
+                <p>Test your knowledge with subject-wise questions.</p>
+                <button class="action"
+                onclick="window.location.href='quiz.html'">
+                    Explore Quiz
+                </button>
+            </div>
+
+            <div class="feature">
+                <h3>📝 Study Notes</h3>
+                <p>Search notes by subject and topic.</p>
+                <button class="action"
+                onclick="window.location.href='notes.html'">
+                    Explore Notes
+                </button>
+            </div>
+
+            <div class="feature">
+                <h3>ℹ️ About Us</h3>
+                <p>Learn about Smart Study Hub.</p>
+                <button class="action"
+                onclick="window.location.href='about.html'">
+                    About Us
+                </button>
+            </div>
+
+            <div class="feature">
+                <h3>✉️ Contact Us</h3>
+                <p>Share your feedback and questions.</p>
+                <button class="action"
+                onclick="window.location.href='contact.html'">
+                    Contact Us
+                </button>
+            </div>
+
+        </div>
+    </section>
+
 </div>
-
-<section class="section">
-<h2>📚 Explore Subjects</h2>
-<div class="cards" id="subjectCards">
-
-<div class="card">
-<h3>📐 Mathematics</h3>
-<p>Practice Maths</p>
-<button onclick="openSubject('math')">Start Quiz</button>
-</div>
-
-<div class="card">
-<h3>⚡ Physics</h3>
-<p>Practice Physics</p>
-<button onclick="openSubject('physics')">Start Quiz</button>
-</div>
-
-<div class="card">
-<h3>🧪 Chemistry</h3>
-<p>Practice Chemistry</p>
-<button onclick="openSubject('chemistry')">Start Quiz</button>
-</div>
-
-<div class="card">
-<h3>💻 Computer Science</h3>
-<p>Practice Programming</p>
-<button onclick="openSubject('computer')">Start Quiz</button>
-</div>
-
-<div class="card">
-<h3>📖 English</h3>
-<p>Practice English</p>
-<button onclick="openSubject('english')">Start Quiz</button>
-</div>
-
-</div>
-</section>
-
-<section class="section">
-<div class="quiz-box" id="quizBox">
-<h2 id="quizTitle">Subject Quiz</h2>
-<p>5 Questions | 2 Marks Each | Total 10 Marks</p>
-<form id="quizForm">
-<div id="questions"></div>
-<button type="submit">Submit Test</button>
-</form>
-
-<div id="result">
-<h2>Your Result</h2>
-<h3 id="score"></h3>
-<p id="feedback"></p>
-<button type="button" onclick="resetQuiz()">Try Another Quiz</button>
-</div>
-</div>
-</section>
-
-<section class="section">
-<h2>📝 Study Notes</h2>
-<p>Read notes and improve your learning every day.</p>
-</section>
 
 <footer>
-© 2026 Smart Study Hub | Happy Learning 🌸
+    <p>© 2026 Smart Study Hub | Learn Every Day</p>
 </footer>
 
 <script>
-const quizData={
-math:{
-title:"Mathematics Quiz",
-questions:[
-["Derivative of x²?",["x","2x","x³","2"],1],
-["5 × 4 = ?",["15","10","20","25"],2],
-["Integration of 1 is?",["x + C","0","1/x","x²"],0],
-["10² = ?",["20","100","50","10"],1],
-["Derivative of sin x?",["-sin x","cos x","tan x","1"],1]
-]},
-physics:{
-title:"Physics Quiz",
-questions:[
-["SI unit of force?",["Joule","Newton","Watt","Volt"],1],
-["Speed formula?",["Distance/Time","Time/Distance","Mass×Time","Force/Area"],0],
-["SI unit of current?",["Volt","Ohm","Ampere","Watt"],2],
-["Which is a scalar quantity?",["Force","Velocity","Speed","Displacement"],2],
-["Acceleration is rate of change of?",["Distance","Velocity","Mass","Force"],1]
-]},
-chemistry:{
-title:"Chemistry Quiz",
-questions:[
-["Symbol of Oxygen?",["O","Ox","Og","Om"],0],
-["H2O is?",["Salt","Water","Oxygen","Hydrogen"],1],
-["Atomic number of Hydrogen?",["2","0","1","8"],2],
-["pH of neutral water?",["0","7","14","5"],1],
-["Common salt formula?",["HCl","NaCl","KCl","H2O"],1]
-]},
-computer:{
-title:"Computer Science Quiz",
-questions:[
-["Which language are we practising?",["HTML","C++","CSS","SQL"],1],
-["Which symbol ends a C++ statement?",[":",";","!","."],1],
-["Starting function in C++?",["start()","main()","run()","begin()"],1],
-["Address operator?",["*","&","%","#"],1],
-["Which header supports cout?",["iostream","math.h","string","time.h"],0]
-]},
-english:{
-title:"English Quiz",
-questions:[
-["Article before apple?",["A","An","The","No article"],1],
-["Past tense of go?",["Goed","Going","Went","Gone"],2],
-["Opposite of happy?",["Glad","Sad","Kind","Joyful"],1],
-["Correct spelling?",["Beautiful","Beautifull","Beutiful","Butiful"],0],
-["Correct sentence?",["She go to college","She goes to college","She going college","She gone college"],1]
-]}
-};
 
-let currentQuiz=null;
+// Your Google Apps Script URL
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwyLBVdPKCfPVSYlYdRYCMsvUIArcqjTUclDMVGMUcQUbqSsu0drVrkLVB2z1HzpgkUIQ/exec";
 
-function openSubject(subject){
-currentQuiz=quizData[subject];
-document.getElementById("quizTitle").textContent=currentQuiz.title;
-document.getElementById("quizBox").style.display="block";
-document.getElementById("result").style.display="none";
+// Firebase configuration placeholder
+const GOOGLE_CONFIG = GOOGLE_SCRIPT_URL;
+const FIREBASE_CONFIG = {};
 
-const area=document.getElementById("questions");
-area.innerHTML="";
-
-currentQuiz.questions.forEach((q,index)=>{
-let html='<div class="question"><p>'+(index+1)+'. '+q[0]+'</p>';
-
-q[1].forEach((option,i)=>{
-html+='<label><input type="radio" name="q'+index+'" value="'+i+'" required> '+option+'</label>';
-});
-
-html+='</div>';
-area.innerHTML+=html;
-});
-
-document.getElementById("quizBox").scrollIntoView({behavior:"smooth"});
+// Open selected subject quiz
+function openQuiz(subject) {
+    window.location.href =
+    "quiz.html?subject=" + encodeURIComponent(subject);
 }
 
-document.getElementById("quizForm").addEventListener("submit",function(e){
-e.preventDefault();
+// Search subjects
+document.getElementById("searchBox")
+.addEventListener("input", function() {
 
-let marks=0;
+    const search = this.value.toLowerCase();
 
-currentQuiz.questions.forEach((q,index)=>{
-const answer=document.querySelector('input[name="q'+index+'"]:checked');
-if(answer && Number(answer.value)===q[2]){
-marks+=2;
-}
+    document.querySelectorAll("#subjectCards .card")
+    .forEach(card => {
+
+        card.style.display =
+        card.innerText.toLowerCase().includes(search)
+        ? "block" : "none";
+
+    });
 });
 
-document.getElementById("score").textContent="Your Score: "+marks+" / 10";
-
-document.getElementById("feedback").textContent=
-marks>=8?"Excellent work! 🎉":
-marks>=6?"Good job! Keep practising!":
-"Keep learning and try again!";
-
-document.getElementById("result").style.display="block";
-document.getElementById("result").scrollIntoView({behavior:"smooth"});
-});
-
-function resetQuiz(){
-document.getElementById("quizForm").reset();
-document.getElementById("result").style.display="none";
-document.getElementById("quizBox").style.display="none";
-document.getElementById("subjectCards").scrollIntoView({behavior:"smooth"});
+// Logout
+function logout() {
+    window.location.href = "index.html";
 }
 
-document.getElementById("searchBox").addEventListener("input",function(){
-const value=this.value.toLowerCase();
-
-document.querySelectorAll("#subjectCards .card").forEach(card=>{
-card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
-});
-});
 </script>
 
 </body>
 </html>
-
-
-        
