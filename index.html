@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Study Hub - Sign Up</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffc1dc, #e7c6ff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    width: 380px;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px #bd6e9c55;
+    text-align: center;
+}
+
+.logo {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: #d63384;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #777;
+    margin-bottom: 22px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    margin: 9px 0;
+    border: 1px solid #e9b4d0;
+    border-radius: 9px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #d63384;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    background: #e84393;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #c52d79;
+}
+
+.login {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.login a {
+    color: #d63384;
+    text-decoration: none;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">🌸</div>
+
+    <h1>Smart Study Hub</h1>
+
+    <p>Create Your Student Account</p>
+
+    <form id="signupForm">
+
+        <input type="text"
+        placeholder="Full Name" required>
+
+        <input type="email"
+        placeholder="Email Address" required>
+
+        <input type="text"
+        placeholder="Class / Course" required>
+
+        <input type="password"
+        placeholder="Create Password"
+        minlength="8" required>
+
+        <button type="submit">
+            Sign Up
+        </button>
+
+    </form>
+
+    <div class="login">
+        Already have an account?
+        <a href="#">Login</a>
+    </div>
+
+</div>
+
+<script>
+document.getElementById("signupForm")
+.addEventListener("submit", function(event) {
+    event.preventDefault();
+    alert("Registration form submitted!");
+});
+</script>
+
+</body>
+</html>
